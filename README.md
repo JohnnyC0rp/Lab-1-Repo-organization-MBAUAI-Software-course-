@@ -40,3 +40,6 @@ pdoc src/receipt_extractor -o docs
 
 ## Notes
 - The amount field is normalized to a float if it includes a `$` symbol.
+
+## Git Workflow
+- Use a feature branch and open a PR for review before merging into `main`.
