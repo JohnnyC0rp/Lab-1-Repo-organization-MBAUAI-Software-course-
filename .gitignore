@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.receipts
+receipts/
+docs/
+COMMAND_API_OPENAI.txt
+build/
+dist/
+*.zip
