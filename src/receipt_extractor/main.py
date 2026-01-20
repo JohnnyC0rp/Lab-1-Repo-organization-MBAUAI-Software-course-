@@ -18,6 +18,7 @@ def process_directory(dirpath):
     for name, path in io_mod.list_files(dirpath):
         image_b64 = io_mod.encode_file(path)
         data = gpt.extract_receipt_info(image_b64)
+        data = gpt.normalize_amount(data)
         results[name] = data
     return results
 

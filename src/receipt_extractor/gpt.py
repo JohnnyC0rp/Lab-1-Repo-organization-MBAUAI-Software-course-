@@ -1,5 +1,6 @@
 # gpt.py
 import json
+from typing import Any, Dict
 
 from openai import OpenAI
 
@@ -57,3 +58,36 @@ The output must be valid JSON.
         ]
     )
     return json.loads(response.choices[0].message.content)
+
+
+def normalize_amount(receipt_info: Dict[str, Any]) -> Dict[str, Any]:
+    """Normalize the amount field in a receipt info dictionary.
+
+    This removes a leading "$" if present, strips separators, converts the
+    value to float, and replaces the original entry when conversion succeeds.
+
+    Args:
+        receipt_info: Receipt data with an "amount" field.
+
+    Returns:
+        The updated receipt_info dictionary.
+    """
+    if not isinstance(receipt_info, dict):
+        return receipt_info
+
+    amount = receipt_info.get("amount")
+    if amount is None:
+        return receipt_info
+
+    if isinstance(amount, (int, float)):
+        receipt_info["amount"] = float(amount)
+        return receipt_info
+
+    if isinstance(amount, str):
+        cleaned = amount.replace("$", "").replace(",", "").strip()
+        try:
+            receipt_info["amount"] = float(cleaned)
+        except ValueError:
+            pass
+
+    return receipt_info

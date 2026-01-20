@@ -37,3 +37,6 @@ Generate API docs with:
 ```bash
 pdoc src/receipt_extractor -o docs
 ```
+
+## Notes
+- The amount field is normalized to a float if it includes a `$` symbol.
